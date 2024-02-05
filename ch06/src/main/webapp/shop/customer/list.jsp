@@ -18,7 +18,7 @@
 		Context ctx=(Context)initCtx.lookup("java:comp/env");//JNDI 기본 환경 이름
 		
 		//2단계-커넥션 풀에서 커넥션 가져오기
-		DataSource ds=(DataSource)ctx.lookup("jdbc/shop");
+		DataSource ds=(DataSource)ctx.lookup("jdbc/jboard1");
 		Connection conn=ds.getConnection();
 		String sql="SELECT * FROM `Customer`";
 		PreparedStatement psmt=conn.prepareStatement(sql);

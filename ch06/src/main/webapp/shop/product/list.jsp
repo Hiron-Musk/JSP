@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="dto.ProductDTO"%>
+<%@page import="kr.co.jboard1.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
