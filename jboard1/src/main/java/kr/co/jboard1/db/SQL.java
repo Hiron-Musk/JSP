@@ -22,4 +22,5 @@ public class SQL {
 											+"`regip`=?,"
 											+"`rdate`=NOW()";
 
+	public static final String SELECT_ARTICLES="SELECT * FROM `Article`";
 }
