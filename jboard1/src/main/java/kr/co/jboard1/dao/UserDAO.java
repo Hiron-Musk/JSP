@@ -1,14 +1,6 @@
 package kr.co.jboard1.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.List;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 
 import kr.co.jboard1.db.DBHelper;
 import kr.co.jboard1.db.SQL;
@@ -17,20 +9,19 @@ import kr.co.jboard1.dto.UserDTO;
 
 public class UserDAO extends DBHelper {
 	
-	private static UserDAO instance=new UserDAO();
-	
+	// 싱글톤
+	private static UserDAO instance = new UserDAO();
 	public static UserDAO getInstance() {
 		return instance;
 	}
 	private UserDAO() {}
 	
-	//기본 CRUD 메서드
+	
+	// 기본 CRUD 메서드
 	public void insertUser(UserDTO user) {
-		
-		try{
-			getConnection();
-
-			psmt=conn.prepareStatement(SQL.INSERT_USER);
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_USER);
 			psmt.setString(1, user.getUid());
 			psmt.setString(2, user.getPass());
 			psmt.setString(3, user.getName());
@@ -40,14 +31,11 @@ public class UserDAO extends DBHelper {
 			psmt.setString(7, user.getRegip());
 			
 			psmt.executeUpdate();
-			
 			closeAll();
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public UserDTO selectUser(String uid) {
@@ -55,10 +43,6 @@ public class UserDAO extends DBHelper {
 	}
 	
 	public List<UserDTO> selectUsers() {
-		
-		
-		
-		
 		return null;
 	}
 	
@@ -70,47 +54,22 @@ public class UserDAO extends DBHelper {
 		
 	}
 	
-	
-	
-	//사용자 CRUD 메서드
-	public TermsDTO selectTerms() {
-		TermsDTO terms=null;
-		try{
-			conn=getConnection();
-			
-			
-			stmt=conn.createStatement();
-			ResultSet rs=stmt.executeQuery(SQL.SELECT_TERMS);
-			
-			if(rs.next()){
-				terms=new TermsDTO();
-				terms.setTerms(rs.getString(1));
-				terms.setPrivacy(rs.getString(2));
-			}
-			
-			closeAll();
-			
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return terms;
-	}
-	
+	// 사용자 정의 CRUD 메서드
 	public UserDTO selectUserForLogin(String uid, String pass) {
-		UserDTO user=null;
-		try{
-			conn=getConnection();
-			psmt=conn.prepareStatement(SQL.SELECT_USER_FOR_LOGIN);
+		
+		UserDTO user = null;
+		
+		try {
+			conn = getConnection();
 			
+			psmt = conn.prepareStatement(SQL.SELECT_USER_FOR_LOGIN);
 			psmt.setString(1, uid);
 			psmt.setString(2, pass);
 			
-			ResultSet rs=psmt.executeQuery();
+			rs = psmt.executeQuery();
 			
 			if(rs.next()){
-				//회원이 맞을 경우
-				user=new UserDTO();
+				user = new UserDTO();
 				user.setUid(rs.getString(1));
 				user.setPass(rs.getString(2));
 				user.setName(rs.getString(3));
@@ -124,15 +83,50 @@ public class UserDAO extends DBHelper {
 				user.setRegip(rs.getString(11));
 				user.setRdate(rs.getString(12));
 				user.setLeaveDate(rs.getString(13));
-				
 			}
+			
 			closeAll();
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
 		return user;
 	}
 	
 	
-
+	public TermsDTO selectTerms() {
+		
+		TermsDTO terms = null;
+		
+		try {
+			conn = getConnection();
+			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_TERMS);
+			
+			if(rs.next()){
+				terms = new TermsDTO();
+				terms.setTerms(rs.getString(1));
+				terms.setPrivacy(rs.getString(2));
+			}
+			
+			closeAll();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return terms;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
