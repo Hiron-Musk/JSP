@@ -39,8 +39,9 @@
 		pageGroupEnd = lastPageNum;
 	}
 	
-	//페이지 시작번호 계산
-	int pageStartNum=total-start;
+	// 페이지 시작번호 계산
+	int pageStartNum = total - start;
+	
 
 	// 글 조회
 	List<ArticleDTO> articles = dao.selectArticles(start);
