@@ -4,7 +4,14 @@ public class TermsDTO {
 
 	private String terms;
 	private String privacy;
+	private String sms;
 	
+	public String getSms() {
+		return sms;
+	}
+	public void setSms(String sms) {
+		this.sms = sms;
+	}
 	public String getTerms() {
 		return terms;
 	}

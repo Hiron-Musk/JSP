@@ -14,8 +14,15 @@ public class UserDTO {
 	private String addr2;
 	private String regip;
 	private String rdate;
+	private String sms;
 	private String leaveDate;
 	
+	public String getSms() {
+		return sms;
+	}
+	public void setSms(String sms) {
+		this.sms = sms;
+	}
 	public String getUid() {
 		return uid;
 	}
