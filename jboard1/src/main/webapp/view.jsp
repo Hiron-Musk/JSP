@@ -5,6 +5,9 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String no = request.getParameter("no");
+	String searchType = request.getParameter("searchType");
+	String keyword    = request.getParameter("keyword");
+	
 
 	ArticleDAO dao = ArticleDAO.getInstance();
 	
@@ -17,34 +20,45 @@
 	// 댓글 조회
 	List<ArticleDTO> comments = dao.selectComments(no);	
 	
+	// 동적 파라미터 생성
+	String params = "";
+	
+	if(searchType != null && keyword != null){
+		params = "?searchType="+searchType+"&keyword="+keyword;
+	}
 %>
 <%@ include file="./_header.jsp" %>
 <script>	
 	window.onload = function(){
 		
-		//원글수정
-		const btnModify=document.querySelectorAll('.btnModify');
-		if(btnModify!=null){
-			btnModify.onclick('수정하시겠습니까?'){
-				return true;
-			}else{
-				return false;
+		// 원글수정
+		const btnModify = document.querySelector('.btnModify');
+		
+		if(btnModify != null){			
+			btnModify.onclick = ()=>{
+				if(confirm('수정 하시겠습니까?')){
+					return true;
+				}else{
+					return false;
+				}
 			}
 		}
+		
 		
 		// 원글삭제
 		const btnDelete = document.querySelector('.btnDelete');
 		
-		if(btnDelete!=null){
-		
-		btnDelete.onclick = () => {
-			if(confirm('정말 삭제 하시겠습니까?')){
-				return true;
-			}else{
-				return false;
+		if(btnDelete != null){
+			
+			btnDelete.onclick = () => {
+				if(confirm('정말 삭제 하시겠습니까?')){
+					return true;
+				}else{
+					return false;
+				}
 			}
+			
 		}
-	}
 		
 		// 댓글작성 취소
 		const btnCancel = document.getElementsByClassName('btnCancel')[0];
@@ -55,8 +69,18 @@
 		}
 		
 		// 댓글삭제
-		const del = document.querySelectorAll('.del');
+		const dels = document.getElementsByClassName('del');
 		
+		for(const del of dels ){
+			
+			
+			del.onclick = function(){
+				alert();
+			}
+			
+		}
+		
+		/*
 		del.forEach((item)=>{
 			
 			item.onclick = function(){
@@ -71,7 +95,7 @@
 				}
 			}
 		});
-		
+		*/
 		// 댓글수정
 		const mod = document.querySelectorAll('.mod');
 		
@@ -99,8 +123,7 @@
 					textarea.style.background = 'transparent';	
 				}
 			}
-		});
-		
+		});		
 	}
 </script>
 <main>
@@ -132,14 +155,12 @@
             <a href="/jboard1/proc/deleteProc.jsp?no=<%= article.getNo() %>" class="btnDelete">삭제</a>
             <a href="/jboard1/modify.jsp?no=<%= article.getNo() %>" class="btnModify">수정</a>
             <% } %>
-            
-            <a href="/jboard1/list.jsp" class="btnList">목록</a>
-        </div>  
+            <a href="/jboard1/list.jsp<%= params %>" class="btnList">목록</a>
+        </div>
         
         <!-- 댓글리스트 -->
         <section class="commentList">
             <h3>댓글목록</h3>
-            
             <% for(ArticleDTO comment : comments){ %>
             <form action="/jboard1/proc/commentUpdate.jsp" method="post">
             	<input type="hidden" name="no" value="<%= comment.getNo() %>">
