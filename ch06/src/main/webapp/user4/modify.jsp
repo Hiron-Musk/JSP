@@ -1,4 +1,4 @@
-<%@page import="kr.co.jboard1.dto.User4DTO"%>
+<%@page import="dto.User4DTO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>

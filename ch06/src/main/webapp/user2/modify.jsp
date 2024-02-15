@@ -1,4 +1,4 @@
-<%@page import="kr.co.jboard1.dto.User2DTO"%>
+<%@page import="dto.User2DTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>

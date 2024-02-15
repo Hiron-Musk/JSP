@@ -1,4 +1,4 @@
-<%@page import="kr.co.jboard1.dto.User3DTO"%>
+<%@page import="dto.User3DTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
