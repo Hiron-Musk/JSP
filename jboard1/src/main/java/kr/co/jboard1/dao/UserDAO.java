@@ -18,6 +18,54 @@ public class UserDAO extends DBHelper {
 	
 	
 	// 기본 CRUD 메서드
+	
+	public int selectCountUser(String type,String value) {
+		
+		
+		//동적처리
+		//String sql=SQL.SELECT_COUNT_USER;
+		StringBuilder sql=new StringBuilder(SQL.SELECT_COUNT_USER);
+		
+		if(type.equals("uid")) {
+			
+			sql.append(SQL.WHERE_UID);
+			
+		}else if(type.equals("nick")) {
+			
+			sql.append(SQL.WHERE_NICK);
+			
+		}else if(type.equals("email")) {
+			
+			sql.append(SQL.WHERE_EMAIL);
+			 
+		}else if(type.equals("hp")) {
+			
+			sql.append(SQL.WHERE_HP);
+			
+		}
+		
+		int result=0;
+		
+		try {
+			conn=getConnection();
+			psmt=conn.prepareStatement(sql.toString());
+			psmt.setString(1, value);
+			
+			rs=psmt.executeQuery();
+			
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+			closeAll();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
 	public void insertUser(UserDTO user) {
 		try {
 			conn = getConnection();

@@ -62,4 +62,11 @@ public class SQL {
 	public static final String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?";
 	public static final String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?";
 	
+	//회원가입시 중복체크 동적처리
+	public static final String SELECT_COUNT_USER="SELECT COUNT(*) FROM `User` ";
+	public static final String WHERE_UID="WHERE `uid`=?";
+	public static final String WHERE_NICK="WHERE `nick`=?";
+	public static final String WHERE_HP="WHERE `hp`=?";
+	public static final String WHERE_EMAIL="WHERE `email`=?";
+	
 }
