@@ -17,6 +17,7 @@
 					const birth=formUser2.birth.value;
 					const addr=formUser2.addr.value;
 					
+					//json 객체 생성
 					const jsonData={
 							"uid":uid,
 							"name":name,
