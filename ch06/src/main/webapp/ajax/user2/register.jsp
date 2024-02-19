@@ -7,8 +7,8 @@
 		<script>
 			window.onload=function(){
 				const btnSubmit=document.getElementsByName('submit')[0];
-				const formUser2=document.getElementsByName('form')[0];
-				const uid=document.getElementsByName('uid')[0];
+				const formUser2 = document.querySelector('form');
+				
 				btnSubmit.onclick=(e)=>{
 					e.preventDefault();
 					
@@ -58,29 +58,29 @@
 	<body>
 		<h3>User2 등록</h3>
 		<form action="#">
-		<table border="1">
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="uid"></td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" name="name"></td>
-			</tr>
-			<tr>
-				<td>생년월일</td>
-				<td><input type="date" name="birth"></td>
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td><input type="text" name="addr"></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="right">
-				<input type="submit" name="submit" value="등록하기">
-				</td>
-			</tr>
-		</table>
+			<table border="1">
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" name="uid"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="name"></td>
+				</tr>
+				<tr>
+					<td>생년월일</td>
+					<td><input type="date" name="birth"></td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td><input type="text" name="addr"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right">
+					<input type="submit" name="submit" value="등록하기">
+					</td>
+				</tr>
+			</table>
 		</form>
 	</body>
 </html>
