@@ -37,6 +37,10 @@ public class UserService {
 	public UserDTO selectUser(String uid) {
 		return dao.selectUser(uid);
 	}
+	
+	public UserDTO selectUserForLogin(String uid,String pass) {
+		return dao.selectUserForLogin(uid,pass);
+	}
 	public List<UserDTO> selectUsers() {
 		return dao.selectUsers();
 	}

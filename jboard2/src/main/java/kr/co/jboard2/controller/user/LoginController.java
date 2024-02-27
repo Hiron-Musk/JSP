@@ -8,16 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import kr.co.jboard2.dto.UserDTO;
+import kr.co.jboard2.service.UserService;
 
 @WebServlet("/user/login.do")
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = -721710472324177999L;
 	
+	private UserService service=UserService.getInstance();
+	private Logger logger=LoggerFactory.getLogger(this.getClass());
+	
+	
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
+	
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,8 +36,24 @@ public class LoginController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		String uid=req.getParameter("uid");
+		String pass=req.getParameter("pass");
+	
+		UserDTO userDTO=service.selectUserForLogin(uid, pass);
+		
+		if(userDTO!=null) {
+			//회원이면
+			HttpSession session=req.getSession();
+			session.setAttribute("sessUser", userDTO);
+			
+			resp.sendRedirect("/jboard2/list.do");
+			
+		}else {
+			//회원이 아니면
+			resp.sendRedirect("/jboard2/user/login.do?success=100");
+		}
+	
+		
 	}
 	
 }
