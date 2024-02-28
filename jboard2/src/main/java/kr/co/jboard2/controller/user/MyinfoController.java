@@ -8,24 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-@WebServlet("/user/myInfo.do")
-public class MyinfoController extends HttpServlet {
 
-	private static final long serialVersionUID = -5821312658338382607L;
+@WebServlet("/user/myInfo.do")
+public class MyInfoController extends HttpServlet {
+	private static final long serialVersionUID = 492641282127727578L;
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
+		
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher=req.getRequestDispatcher("/user/myInfo.jsp");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/myInfo.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+	
 	}
 }

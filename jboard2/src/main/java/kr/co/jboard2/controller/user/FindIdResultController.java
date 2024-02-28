@@ -11,23 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/user/findIdResult.do")
 public class FindIdResultController extends HttpServlet {
+	private static final long serialVersionUID = 599640539017077254L;
 
-	private static final long serialVersionUID = -3664501897454960878L;
-	
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
+		
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher=req.getRequestDispatcher("/user/findIdResult.jsp");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findIdResult.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+	
 	}
-
 }

@@ -3,7 +3,6 @@
   <property name="NAME" value="jboard2"/>
   <property name="LOG_DIR" value="/logs/"/>
 
-
   <!-- 기본 콘솔 출력 어펜더 -->
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <!-- encoders are assigned the type

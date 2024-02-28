@@ -7,20 +7,22 @@ import kr.co.jboard2.dao.TermsDAO;
 import kr.co.jboard2.dto.TermsDTO;
 
 public class TermsService {
-	private static TermsService instance=new TermsService();
-	
+
+	// Singleton
+	private static TermsService instance = new TermsService();
 	public static TermsService getInstance() {
 		return instance;
 	}
 	private TermsService() {}
 	
-	//로거 생성
-	private Logger logger=LoggerFactory.getLogger(this.getClass());
-
-	private TermsDAO dao=TermsDAO.getInstance();
+	// Logger
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	// DAO
+	private TermsDAO dao = TermsDAO.getInstance();
+	
 	public void insertTerms() {
 		dao.insertTerms();
-		
 	}
 	public TermsDTO selectTerms() {
 		return dao.selectTerms();
@@ -30,5 +32,6 @@ public class TermsService {
 	}
 	public void deleteTerms() {
 		dao.deleteTerms();
-	}
+	}	
+	
 }

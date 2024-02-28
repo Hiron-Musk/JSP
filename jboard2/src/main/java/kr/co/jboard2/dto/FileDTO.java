@@ -44,12 +44,10 @@ public class FileDTO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	
 	@Override
 	public String toString() {
 		return "FileDTO [fno=" + fno + ", ano=" + ano + ", oName=" + oName + ", sName=" + sName + ", download="
 				+ download + ", rdate=" + rdate + "]";
 	}
-	
-	
-
 }

@@ -8,26 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 @WebServlet("/view.do")
 public class ViewController extends HttpServlet {
+	private static final long serialVersionUID = -4302286311604205457L;
 
-
-	private static final long serialVersionUID = -2120022050925682570L;
-	
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
+		
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher=req.getRequestDispatcher("/view.jsp");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/view.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+	
+	
 	}
-
 }

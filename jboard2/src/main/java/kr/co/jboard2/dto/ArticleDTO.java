@@ -3,6 +3,7 @@ package kr.co.jboard2.dto;
 import java.util.List;
 
 public class ArticleDTO {
+
 	private int no;
 	private int parent;
 	private int comment;
@@ -15,8 +16,16 @@ public class ArticleDTO {
 	private String regip;
 	private String rdate;
 	
-	//추가필드
-	private List<FileDTO> fileDTOs;//글 하나당 파일 최대 2개니까
+	// 추가필드
+	private List<FileDTO> fileDTOs;
+	private String nick;
+	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	
 	public List<FileDTO> getFileDTOs() {
 		return fileDTOs;
@@ -24,8 +33,6 @@ public class ArticleDTO {
 	public void setFileDTOs(List<FileDTO> fileDTOs) {
 		this.fileDTOs = fileDTOs;
 	}
-	
-	
 	
 	public int getNo() {
 		return no;
@@ -69,7 +76,6 @@ public class ArticleDTO {
 	public void setFile(int file) {
 		this.file = file;
 	}
-	
 	public int getHit() {
 		return hit;
 	}
@@ -101,9 +107,4 @@ public class ArticleDTO {
 				+ title + ", content=" + content + ", file=" + file + ", hit=" + hit + ", writer=" + writer + ", regip="
 				+ regip + ", rdate=" + rdate + "]";
 	}
-	
-	
-	
-	
-
 }

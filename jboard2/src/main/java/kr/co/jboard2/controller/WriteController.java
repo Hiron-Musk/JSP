@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.jboard2.dao.FileDAO;
 import kr.co.jboard2.dto.ArticleDTO;
 import kr.co.jboard2.dto.FileDTO;
 import kr.co.jboard2.service.ArticleService;
@@ -24,7 +25,8 @@ public class WriteController extends HttpServlet {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ArticleService articleService = ArticleService.getInstance();
-	private FileService fileService=FileService.getInstance();
+	private FileService fileService = FileService.getInstance();
+
 	@Override
 	public void init() throws ServletException {
 		
@@ -39,7 +41,6 @@ public class WriteController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
 		/*
 		// Multipart/form-data는 getParameter 수신 안됨
 		String title   = req.getParameter("title");
@@ -48,24 +49,26 @@ public class WriteController extends HttpServlet {
 		*/
 		String regip   = req.getRemoteAddr();
 		
-		//파일 업로드
+		// 파일 업로드
 		ArticleDTO articleDTO = articleService.fileUpload(req);
-		articleDTO.setRegip(regip);
-		
+		articleDTO.setRegip(regip);		
 		logger.debug(""+articleDTO);
 		
-		//글등록
-		int pk=articleService.insertArticle(articleDTO);
+		// 글 등록
+		int pk = articleService.insertArticle(articleDTO);
 		
-		//파일등록
-		List<FileDTO>files=articleDTO.getFileDTOs();
+		// 파일 등록
+		List<FileDTO> files = articleDTO.getFileDTOs();
 		
-		for(FileDTO fileDTO:files) {
+		for(FileDTO fileDTO : files) {
 			fileDTO.setAno(pk);
+			logger.debug(""+fileDTO);
+			
 			fileService.insertFile(fileDTO);
 		}
-		
 		
 		resp.sendRedirect("/jboard2/list.do");
 	}
 }
+
+

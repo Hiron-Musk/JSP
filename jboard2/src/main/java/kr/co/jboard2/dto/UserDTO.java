@@ -1,10 +1,11 @@
 package kr.co.jboard2.dto;
 
 public class UserDTO {
+
 	private String uid;
 	private String pass;
 	private String name;
-	private String nick ;
+	private String nick;
 	private String email;
 	private String hp;
 	private String role;
@@ -105,7 +106,4 @@ public class UserDTO {
 				+ ", hp=" + hp + ", role=" + role + ", zip=" + zip + ", addr1=" + addr1 + ", addr2=" + addr2
 				+ ", regip=" + regip + ", sms=" + sms + ", rdate=" + rdate + ", leaveDate=" + leaveDate + "]";
 	}
-	
-	
-
 }

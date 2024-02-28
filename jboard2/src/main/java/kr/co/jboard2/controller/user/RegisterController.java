@@ -14,41 +14,40 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.jboard2.dto.UserDTO;
 import kr.co.jboard2.service.UserService;
+
 @WebServlet("/user/register.do")
 public class RegisterController extends HttpServlet {
+	private static final long serialVersionUID = 7627243987787763399L;
 
-
-	private static final long serialVersionUID = -3937831513474791716L;
-	
-	private Logger logger=LoggerFactory.getLogger(this.getClass());
-	private UserService service=UserService.getInstance();
-	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private UserService service = UserService.getInstance();
 	
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
+		
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher=req.getRequestDispatcher("/user/register.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/register.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid=req.getParameter("uid");
-		String pass1=req.getParameter("pass1");
-		String name=req.getParameter("name");
-		String nick=req.getParameter("nick");
-		String email=req.getParameter("email");
-		String hp=req.getParameter("hp");
-		String sms=req.getParameter("sms");
-		String regip=req.getRemoteAddr();
+		// 데이터 수신
+		String uid   = req.getParameter("uid");
+		String pass1 = req.getParameter("pass1");
+		String name  = req.getParameter("name");
+		String nick  = req.getParameter("nick");
+		String email = req.getParameter("email");
+		String hp    = req.getParameter("hp");
+		String sms   = req.getParameter("sms");
+		String regip = req.getRemoteAddr();
 		
-		
-		
-		UserDTO userDTO=new UserDTO();
+		// UserDTO 생성
+		UserDTO userDTO = new UserDTO();
 		userDTO.setUid(uid);
 		userDTO.setPass(pass1);
 		userDTO.setName(name);
@@ -58,15 +57,21 @@ public class RegisterController extends HttpServlet {
 		userDTO.setRegip(regip);
 		userDTO.setSms(sms);
 		
-		
-		//로그 출력
+		// 로그 출력
 		logger.debug(userDTO.toString());
 		
+		// 데이터 INSERT
 		service.insertUser(userDTO);
 		
+		// 리다이렉트
 		resp.sendRedirect("/jboard2/user/login.do");
-	
-	
 	}
-
 }
+
+
+
+
+
+
+
+

@@ -20,16 +20,14 @@ import kr.co.jboard2.dao.UserDAO;
 import kr.co.jboard2.dto.UserDTO;
 
 public class UserService {
-	private static UserService instance=new UserService();
-	
+	private static UserService instance = new UserService();
 	public static UserService getInstance() {
 		return instance;
 	}
 	private UserService() {}
 	
-	private Logger logger=LoggerFactory.getLogger(this.getClass());
-	
-	private UserDAO dao=UserDAO.getInstance();
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private UserDAO dao = UserDAO.getInstance();
 	
 	public void insertUser(UserDTO userDTO) {
 		dao.insertUser(userDTO);
@@ -37,37 +35,36 @@ public class UserService {
 	public UserDTO selectUser(String uid) {
 		return dao.selectUser(uid);
 	}
-	
-	public UserDTO selectUserForLogin(String uid,String pass) {
-		return dao.selectUserForLogin(uid,pass);
-	}
 	public List<UserDTO> selectUsers() {
 		return dao.selectUsers();
 	}
-	
+	public UserDTO selectUserForLogin(String uid, String pass) {
+		return dao.selectUserForLogin(uid, pass);
+	}
 	public void updateUser(UserDTO userDTO) {
 		dao.updateUser(userDTO);
 	}
 	public void deleteUser(String uid) {
 		dao.deleteUser(uid);
-	}
+	}	
 	
-	public int selectCountUser(String type,String value) {
+	public int selectCountUser(String type, String value) {
 		return dao.selectCountUser(type, value);
 	}
 	
+	
 	public void sendEmailCode(HttpSession session, String receiver) {
 		
-		//인증코드 생성(6자리)후 세션 저장
-		int code=ThreadLocalRandom.current().nextInt(100000,1000000);
-		session.setAttribute("code", String.valueOf(code));
+		// 인증코드 생성 후 세션 저장
+		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+		session.setAttribute("code", String.valueOf(code)); 
 		
-		//기본정보
-		String sender="jsa7868@gmail.com";
-		String password = "zery xjnw arqe hxhg";//앱 비밀번호
-		String title="jboard2 인증코드입니다.";
-		String content="<h1>인증코드는 "+code+" 입니다.</h1>";
-
+		// 기본정보
+		String sender = "chhak0503@gmail.com";
+		String password = "skht tzwh lukh orvp"; // 앱 비밀번호
+		String title = "jboard2 인증코드 입니다.";
+		String content = "<h1>인증코드는 " + code + "입니다.</h1>";
+		
 		// Gmail SMTP 서버 설정
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -76,8 +73,7 @@ public class UserService {
 		props.put("mail.smtp.ssl.enable", "true");
 		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		
-		
-		try {
+		try{
 			// Gmail STMP 세션 생성
 			Session gmailSession = Session.getInstance(props, new Authenticator(){
 				@Override
@@ -95,28 +91,41 @@ public class UserService {
 			
 			// 메일 발송
 			Transport.send(message);
-		}catch(Exception e) {
+			
+		}catch(Exception e){
 			e.printStackTrace();
 		}
-
 		
 	}
 	
 	public int confirmEmailCode(HttpSession session, String code) {
 		
-		String sessCode=(String)session.getAttribute("code");
+		String sessCode = (String) session.getAttribute("code");
 		
 		if(sessCode.equals(code)) {
-			//성공
+			// 성공
 			return 1;
-			
 		}else {
-			//실패
+			// 실패
 			return 0;
-		}
-		
-		
-		
+		}		
 	}
-
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

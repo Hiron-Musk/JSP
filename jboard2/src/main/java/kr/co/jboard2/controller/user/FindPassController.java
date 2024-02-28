@@ -8,25 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 @WebServlet("/user/findPass.do")
 public class FindPassController extends HttpServlet {
+	private static final long serialVersionUID = 6527854686310005431L;
 
-	private static final long serialVersionUID = -2456492756360307051L;
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
-	}
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher=req.getRequestDispatcher("/user/findPass.jsp");
-		dispatcher.forward(req, resp);
-	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		
 	}
 	
-
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPass.jsp");
+		dispatcher.forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+	}
 }

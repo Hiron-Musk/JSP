@@ -4,6 +4,12 @@ public class SQL {
 
 	
 	public static final String SELECT_TERMS = "SELECT * FROM `terms`";
+	public static final String SELECT_COUNT_USER = "SELECT COUNT(*) FROM `user` ";
+	public static final String WHERE_UID   = "WHERE `uid`=?";
+	public static final String WHERE_NICK  = "WHERE `nick`=?";
+	public static final String WHERE_HP    = "WHERE `hp`=?";
+	public static final String WHERE_EMAIL = "WHERE `email`=?";
+	
 	
 	public static final String INSERT_USER = "INSERT INTO `User` SET "
 										   + "`uid`=?,"
@@ -34,11 +40,12 @@ public class SQL {
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
 	
-	public static final String INSERT_FILE="INSERT INTO `file` SET "
-											+"`ano`=?, "
-											+"`oName`=?, "
-											+"`sName`=?, "
-											+"`rdate`=NOW()";
+	public static final String INSERT_FILE = "INSERT INTO `File` SET "
+											+ "`ano`=?,"
+											+ "`oName`=?,"
+											+ "`sName`=?,"
+											+ "`rdate`=NOW()";
+	
 	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0 ";
 	
@@ -69,11 +76,16 @@ public class SQL {
 	public static final String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?";
 	public static final String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?";
 	
-	//회원가입시 중복체크 동적처리
-	public static final String SELECT_COUNT_USER="SELECT COUNT(*) FROM `User` ";
-	public static final String WHERE_UID="WHERE `uid`=?";
-	public static final String WHERE_NICK="WHERE `nick`=?";
-	public static final String WHERE_HP="WHERE `hp`=?";
-	public static final String WHERE_EMAIL="WHERE `email`=?";
-	
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,51 +15,62 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.jboard2.dto.TermsDTO;
 import kr.co.jboard2.service.TermsService;
+
 @WebServlet("/user/terms.do")
 public class TermsController extends HttpServlet {
-
-
-	private static final long serialVersionUID = -5526161827095080595L;
+	private static final long serialVersionUID = 2636729328948502135L;
 	
-	private Logger logger=LoggerFactory.getLogger(this.getClass());
-	private TermsService service=TermsService.getInstance();
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private TermsService service = TermsService.getInstance();
 	
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
+		
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//약관 데이터 조회
-		TermsDTO termsDTO=service.selectTerms();
+		// 약관 데이터 조회
+		TermsDTO termsDTO = service.selectTerms();
 		
-		//Request 데이터 공유
+		// Request 데이터 공유 
 		req.setAttribute("termsDTO", termsDTO);
 		
-		//포워드
-		RequestDispatcher dispatcher=req.getRequestDispatcher("/user/terms.jsp");
+		// 포워드
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/terms.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String chkSms=req.getParameter("chkSms");
-		logger.debug("sms : "+chkSms);
+		String chkSms = req.getParameter("chkSms");
+		logger.debug("chkSms : " + chkSms);
 		
+		// 세션 생성
+		HttpSession session = req.getSession();
 		
-		//세션 생성
-		HttpSession session=req.getSession();
-		
-		//세션 처리
-		if(chkSms!=null) {
+		// 세션 처리
+		if(chkSms != null) {
 			session.setAttribute("sms", "Y");
 		}else {
 			session.setAttribute("sms", "N");
 		}
 		
+		// 리다이렉트
 		resp.sendRedirect("/jboard2/user/register.do");
 	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
+

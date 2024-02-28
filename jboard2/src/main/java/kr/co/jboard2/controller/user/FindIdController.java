@@ -10,28 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/user/findId.do")
-public class FindController extends HttpServlet {
+public class FindIdController extends HttpServlet {
 
-	private static final long serialVersionUID = 6747872538849006388L;
-	
+	private static final long serialVersionUID = -5566572787223443880L;
+
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
+		
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher=req.getRequestDispatcher("/user/findIdjsp");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findId.jsp");
 		dispatcher.forward(req, resp);
-	
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
-	}
-
 	
+	}
 	
 }

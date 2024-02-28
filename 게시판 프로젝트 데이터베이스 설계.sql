@@ -26,7 +26,7 @@ CREATE TABLE `User`(
 
 );
 
-articleCREATE TABLE `Article`(
+CREATE TABLE `Article`(
 	`no` INT PRIMARY KEY AUTO_INCREMENT,
 	`parent` INT DEFAULT 0,
 	`comment` INT DEFAULT 0,
