@@ -35,8 +35,45 @@ public class FileDAO extends DBHelper {
 		}
 	} 
 	
-	public FileDTO selectFile(int fno) {
-		return null;
+	public FileDTO selectFile(String fno) {
+		FileDTO fileDTO=null;
+		try {
+			conn=getConnection();
+			
+			conn.setAutoCommit(false);//트랙잭션 처리 시작
+			psmt=conn.prepareStatement(SQL.SELECT_FILE);
+			psmt.setString(1, fno);
+			logger.info("selectFile : " + psmt);
+			
+			psmtEtc1=conn.prepareStatement(SQL.UPDATE_FILE_DOWNLOAD);
+			psmtEtc1.setString(1,fno);
+			logger.info("selectFile : " + psmtEtc1);
+			
+			rs=psmt.executeQuery();
+			psmtEtc1.executeUpdate();
+			
+			conn.commit();//트랜잭션 처리 끝
+			
+			if(rs.next()) {
+				fileDTO=new FileDTO();
+				fileDTO.setFno(rs.getInt(1));
+				fileDTO.setAno(rs.getInt(2));
+				fileDTO.setoName(rs.getString(3));
+				fileDTO.setsName(rs.getString(4));
+				fileDTO.setDownload(rs.getInt(5));
+				fileDTO.setRdate(rs.getString(6));
+				
+				
+			}
+			
+			closeAll();
+			
+		}catch(Exception e) {
+			logger.error("selectFile: "+e.getMessage());
+		}
+		
+		
+		return fileDTO;
 	} 
 	public List<FileDTO> selectFiles() {
 		return null;

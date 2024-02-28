@@ -12,37 +12,41 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.jboard2.dto.ArticleDTO;
+import kr.co.jboard2.dto.FileDTO;
 import kr.co.jboard2.service.ArticleService;
+import kr.co.jboard2.service.FileService;
+@WebServlet("/fileDownload.do")
+public class FileDownloadController extends HttpServlet {
 
-@WebServlet("/view.do")
-public class ViewController extends HttpServlet {
-	private static final long serialVersionUID = -4302286311604205457L;
-
-	private ArticleService service=ArticleService.getInstance();
+	private static final long serialVersionUID = 3454011666393788527L;
 	
 	private Logger logger=LoggerFactory.getLogger(this.getClass());
+	private FileService service=FileService.getInstance();
+	private ArticleService articleService=ArticleService.getInstance();
+	
 	@Override
 	public void init() throws ServletException {
-		
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//파일번호 수신
+		String fno=req.getParameter("fno");
 		
-		//글 조회
-		String no=req.getParameter("no");
-		ArticleDTO articleDTO=service.selectArticle(no);
+		//파일 조회
+		FileDTO fileDTO=service.selectFile(fno);
 		
-		req.setAttribute("articleDTO", articleDTO);
+		//파일 다운로드
+		articleService.fileDownload(req,resp,fileDTO);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/view.jsp");
-		dispatcher.forward(req, resp);
-	}
+		
 	
+	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 	
 	}
+	
+	
+
 }
