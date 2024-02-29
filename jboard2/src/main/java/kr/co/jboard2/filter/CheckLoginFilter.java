@@ -13,27 +13,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.jboard2.dto.UserDTO;
-@WebFilter(urlPatterns = {"/list.do","/view.do","/write.do","/modify.do"})
+
+@WebFilter(urlPatterns = {"/list.do", "/view.do", "/write.do", "/modify.do"})
 public class CheckLoginFilter implements Filter {
-	//로그인없이 접근하는거 제한
+
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//로그인 여부 확인
-		HttpServletRequest req=(HttpServletRequest)request;//HttpServletRequest로 세션 생성해야함<ServletRequest와 HttpServletRequest 구분!>
-		HttpSession session=req.getSession();
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+
+		// 로그인 여부 확인
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpSession session = req.getSession();
 		
-		UserDTO sessUser=(UserDTO)session.getAttribute("sessUser");
+		UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
 		
-		if(sessUser!=null) {
-			//다음 필터(컨트롤러)로 이동
-			chain.doFilter(req, response);
+		if(sessUser != null) {
+			// 다음 필터(컨트롤러)로 이동
+			chain.doFilter(request, response);
 			
 		}else {
-			//로그인 페이지로 리다이렉트
-			HttpServletResponse resp=(HttpServletResponse)response;
+			// 로그인 페이지로 리다이렉트
+			HttpServletResponse resp = (HttpServletResponse) response;
 			resp.sendRedirect("/jboard2/user/login.do?success=101");
 		}
+		
 	}
-	
 
 }

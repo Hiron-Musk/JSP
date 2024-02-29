@@ -1,6 +1,7 @@
 package kr.co.jboard2.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,9 +20,9 @@ import kr.co.jboard2.service.ArticleService;
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = -4302286311604205457L;
 
-	private ArticleService service=ArticleService.getInstance();
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ArticleService service = ArticleService.getInstance();
 	
-	private Logger logger=LoggerFactory.getLogger(this.getClass());
 	@Override
 	public void init() throws ServletException {
 		
@@ -30,11 +31,21 @@ public class ViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//글 조회
-		String no=req.getParameter("no");
-		ArticleDTO articleDTO=service.selectArticle(no);
+		String no = req.getParameter("no");
 		
+		// 글 조회
+		ArticleDTO articleDTO = service.selectArticle(no);
+		
+		
+		//댓글조회
+		List<ArticleDTO> comments=service.selectComments(no);
+		
+		
+		
+
+		// view 참조 공유
 		req.setAttribute("articleDTO", articleDTO);
+		req.setAttribute("comments", comments);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/view.jsp");
 		dispatcher.forward(req, resp);
